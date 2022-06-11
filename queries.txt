@@ -1,0 +1,6 @@
+INSERT INTO `customer_user` (`ID`, `name`, `acct_no`, `phone_no`, `address`, `password`, `branch`, `balance`, `fd_status`, `entry_date`) VALUES ('101', 'Virat Kohli', '10000001', '9898767600', '11 Evershine Shopping Centre, Versova Rd, Andheri (west), Mumbai', 'virat@123', 'andheri', '800000', '0', CURRENT_DATE());
+
+
+INSERT INTO `branch_info` (`ID`, `branch_name`, `branch_addr`, `tel_no`, `email`, `work_hr`, `entry_date`) VALUES ('201', 'Pune', 'Trimurthi Chowk, Dhankawadi , pune-43', '02011110202', 'punebank@gmail.com', '10-4', current_timestamp());
+
+INSERT INTO `transactions` (`ID`, `from_acct_no`, `from_name`, `to_acct_no`, `to_name`, `amount`, `transact_date`) VALUES ('111', '1', 'from', '2', 'to', '10', '2021-11-10 17:58:46');

@@ -1,0 +1,70 @@
+create table Accountholderdetails(
+account_no int primary key,
+name varchar(20),
+acc_amount int,
+deposit_date date,
+withdraw_date date;
+
+
+create table SimpleInterest_accdetails(
+account_no int,
+foreign key(account_no)
+currentdate date,
+new_amount int);
+
+insert into Accountholderdetails values(14654754AD,'Aniesh',500000,'2021-01-01','2021-05-01');
+insert into Accountholderdetails values(41234232AB,'Atharva',300000,'2021-02-01','2021-06-01');
+
+select * from Accountholderdetails;
+
+delimiter $
+create procedure calc_interest(in accountid int)
+begin
+desclare fixed_dep int;
+declare interest_amount int;
+declare withdraw_time int;
+declare dateof_deposit date;
+declare dateof_withdraw date;
+
+select acc_amount into fixed_dep
+from accountholder where account_no=accountid;
+
+select deposit_date into dateof_deposit
+from accountholder where account_no=accountid;
+
+select withdraw_date into dateof_withdraw
+from accountholder where account_no=accountid;
+
+
+select datediff(curdate(),dateof_withdraw)
+into withdraw_time;
+
+if withdraw_time>2 and withdraw_time<=3 then
+set interest_amount = (fixed_dep)*(2/100);
+set new_amount = interest_amount + fixed_dep
+insert into SimpleInterest_accdetails values(accountid,curdate(),new_amount);
+
+elseif withdraw_time>3 and withdraw_time<=4 then
+set interest_amount = (fixed_dep)*(3/100);
+set new_amount = interest_amount + fixed_dep
+insert into SimpleInterest_accdetails values(accountid,curdate(),new_amount);
+
+elseif withdraw_time>4 and withdraw_time<=5 then
+set interest_amount = (fixed_dep)*(4/100);
+set new_amount = interest_amount + fixed_dep
+insert into SimpleInterest_accdetails values(accountid,curdate(),new_amount);
+
+elseif withdraw_time>5 and withdraw_time<=6 then
+set interest_amount = (fixed_dep)*(5/100);
+set new_amount = interest_amount + fixed_dep
+insert into SimpleInterest_accdetails values(accountid,curdate(),new_amount);
+
+else
+insert into SimpleInterest_accdetails values(accountid,curdate(),fixed_dep);
+
+end if;
+end $
+
+delimiter ;
+
+select * from SimpleInterest_accdetails;
